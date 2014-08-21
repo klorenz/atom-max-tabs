@@ -1,0 +1,16 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  '.overlayer':
+      'Enable max-tabs': 'max-tabs:toggle'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'max-tabs'
+      'submenu': [
+        { 'label': 'Toggle', 'command': 'max-tabs:toggle' }
+      ]
+    ]
+  }
+]
