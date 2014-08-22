@@ -6,6 +6,8 @@ module.exports =
   configDefaults:
     maxTabs: 8
 
+  closing: false
+
   activate: (state) ->
     #@maxTabsView = new MaxTabsView(state.maxTabsViewState)
     atom.workspaceView.eachPaneView (_paneView) =>
@@ -19,13 +21,16 @@ module.exports =
         @closeTabs(paneView)
 
   closeTabs: (paneView) ->
+    return if @closing
+    @closing = true
     numPanes = atom.workspaceView.getPanes().length
     maxTabs = atom.config.get("max-tabs.maxTabs") / numPanes
     items = paneView.getItems()
     if items.length > maxTabs
       dates = []
+
       for item in items
-        if item.id in @lastAccessed
+        if item.id of @lastAccessed
           dates.push [item, @lastAccessed[item.id]]
         else
           dates.push [item, (new Date()).getTime()]
@@ -35,6 +40,8 @@ module.exports =
         break if paneView.getItems().length <= maxTabs
         continue if d[0].isModified()
         paneView.destroyItem(d[0])
+
+    @closing = false
 
       #console.log paneView.getModel().getPanes()
 
