@@ -38,7 +38,10 @@ module.exports =
 
       for d in dates
         break if paneView.getItems().length <= maxTabs
-        continue if d[0].isModified()
+
+        if d[0].isModified
+          continue if d[0].isModified()
+
         paneView.destroyItem(d[0])
 
     @closing = false
