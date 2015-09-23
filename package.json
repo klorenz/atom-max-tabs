@@ -1,7 +1,7 @@
 {
   "name": "max-tabs",
   "main": "./lib/max-tabs",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Do not have more tabs than maxTabs",
   "repository": "https://github.com/klorenz/atom-max-tabs",
   "license": "MIT",
